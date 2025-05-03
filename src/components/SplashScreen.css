@@ -1,0 +1,33 @@
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    background-color: #242424;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 1s ease 2.0s forwards;
+  }
+  
+  .splash-title {
+    font-size: 15rem; /*initial text size*/
+    color: white;
+    animation: shrinkToTop 2.5s ease forwards;
+  }
+  
+  @keyframes shrinkToTop {
+    0% {
+      transform: scale(1) translateY(100%);
+    }
+    100% {
+      transform: scale(0.3) translateY(-200%);
+    }
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  
