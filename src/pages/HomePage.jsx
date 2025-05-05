@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './../components/Navbar'
+
 import './HomePage.css'
 
 function HomePage(){
     const navigate = useNavigate()
 
     return (
-       <>
+       <> 
         <div className = 'home-page'>
             <div className = 'top-row'>
                 <div className = 'box-todo' onClick={() => navigate('/todo')}>

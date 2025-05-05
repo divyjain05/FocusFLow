@@ -1,5 +1,68 @@
-.page-content {
-    margin-left: 200px; /* Keep it same as Sidebar with which is 200px*/
-    padding: 1rem;
-    color: white;
-  }
+.todo-out{
+  margin-top: 50px;
+  margin-left: 260px;
+  margin-right: 40px;
+  padding-left: 0px;
+  border-radius: 8px;
+  background-color: #333;
+  margin-bottom: 100vh;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+.todo-page {
+  margin-left: 20px;
+  padding-top: 0.4rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: white;
+}
+h2{
+  padding-bottom: 1.3rem;
+}
+.todo-input {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.todo-input input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+.todo-input button {
+  padding: 0.5rem 1rem;
+  background-color: #646cff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: #333;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+}
+.todo-list li.done span {
+  text-decoration: line-through;
+  color: gray;
+}
+.todo-list button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.todo-list button:hover{
+  transform: scale(1.3);
+}
