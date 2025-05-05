@@ -1,0 +1,30 @@
+.home-page {
+    margin-left: 200px; /* account for sidebar */
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .top-row {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .box {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #333;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .box:hover {
+    background-color: #444;
+  }
+  
+  .box h3 {
+    margin: 0 0 0.5rem 0;
+  }
