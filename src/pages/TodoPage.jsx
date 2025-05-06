@@ -39,7 +39,8 @@ function TodoPage() {
           <li key={index} className={task.done ? 'done' : ''}>
             <input type="checkbox" onChange={() => toggleDone(index)} checked={task.done} />
             <span>{task.text}</span>
-            <button onClick={() => deleteTask(index)}>🗑️</button>
+            <button onClick={() => deleteTask(index)}>🗑️</button> 
+            {/* try to find dustbin wala emoji if possible */}
           </li>
         ))}
       </ul>
