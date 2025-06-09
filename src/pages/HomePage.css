@@ -1,31 +1,64 @@
 .home-page {
-    margin-left: 200px; /* account for sidebar */
+    margin-left: 200px; /* space for sidebar */
     padding: 2rem;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     background-color: #333;
-  }
-  
-  .top-row {
+}
+
+.top-row {
     display: flex;
     gap: 1.5rem;
-  }
-  
-  .box {
+    height: 200px; /* Fixed height for top boxes */
+}
+
+.box {
     flex: 1;
     padding: 1.5rem;
-    background-color: #333;
+    background-color: #444;
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.3s;
-  }
-  
-  .box:hover {
-    background-color: #444;
-  }
-  
-  .box h3 {
+    overflow-y: auto; /* For scrolling agar content overflows */
+}
+
+.box:hover {
+    background-color: #555;
+}
+
+.box h3 {
     margin: 0 0 0.5rem 0;
-  }
+    color: #fff;
+}
+
+.bottom-box {
+    height: 300px; /* Taller height for the bottom box */
+    width: 100%;
+    padding: 1.5rem;
+    background-color: #444;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    overflow-y: auto;
+}
+
+.bottom-box:hover {
+    background-color: #555;
+}
+
+.preview-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+}
+
+.preview-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #555;
+}
+
+.preview-item:last-child {
+    border-bottom: none;
+}

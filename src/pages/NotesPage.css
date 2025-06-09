@@ -1,0 +1,135 @@
+.notes-page {
+    margin-left: 200px; /* leaving enough space for sidebar */
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: #333;
+    color: white;
+    position: relative;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.note-card {
+    background-color: #444;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    background-color: #555;
+}
+
+.note-card h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.add-note-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.add-note-button:hover {
+    background-color: #45a049;
+}
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog {
+    background-color: #444;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dialog-title {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #555;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.dialog-content {
+    width: 100%;
+    height: 150px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #555;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.dialog-actions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dialog-actions button:first-child {
+    background-color: #666;
+    color: white;
+}
+
+.dialog-actions button:last-child {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dialog-actions button:hover {
+    opacity: 0.9;
+}
+
+/* Focus styles */
+.dialog-title:focus,
+.dialog-content:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #4CAF50;
+}
