@@ -9,8 +9,7 @@ function HomePage(){
     // showing data - needs to replaced with data which will be fetched.
     //temp data for reference
     const todoPreview = [
-        "Complete project documentation",
-        "Review pull requests",
+        "Complete project",
         "Setup meeting with team"
     ];
 
@@ -49,7 +48,7 @@ function HomePage(){
                 <h3>Journal</h3>
                 <div className='preview-item'>
                     <p>Latest Entry: Today's Reflections</p>
-                    <p>Start writing your thoughts for today...</p>
+                    <p>Today was a badiya din</p>
                 </div>
             </div>
         </div>
