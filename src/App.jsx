@@ -6,6 +6,7 @@ import Sidebar from '/src/components/Sidebar'
 import TodoPage from '/src/pages/TodoPage'
 import HomePage from '/src/pages/HomePage'
 import NotesPage from '/src/pages/NotesPage'
+import JournalPage from '/src/pages/JournalPage'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -28,7 +29,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/todo" element={<TodoPage />} />
               <Route path="/notes" element={<NotesPage />} />
-              {/* <Route path="/journal" element={<JournalPage />} /> */}
+              <Route path="/journal" element={<JournalPage />} />
             </Routes>
           </div>
         </Router>
