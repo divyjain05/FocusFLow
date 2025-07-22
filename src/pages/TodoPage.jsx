@@ -1,28 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TodoPage.css';
 import { useCategories } from '../components/CategoryManager';
+import { db } from '../firebase';
+import { useAuth } from '../components/AuthProvider';
+import { collection, addDoc, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 function TodoPage() {
   const categories = useCategories();
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
 
-  const addTask = () => {
-    if (input.trim() === '') return;
-    setTasks([...tasks, { text: input, done: false, category: selectedCategory }]);
+  // Fetch tasks from Firestore
+  useEffect(() => {
+    if (!user) return;
+    const fetchTasks = async () => {
+      const q = query(collection(db, 'tasks'), where('userId', '==', user.uid));
+      const snapshot = await getDocs(q);
+      setTasks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    };
+    fetchTasks();
+  }, [user]);
+
+  const addTask = async () => {
+    if (input.trim() === '' || !user) return;
+    const docRef = await addDoc(collection(db, 'tasks'), {
+      text: input,
+      done: false,
+      category: selectedCategory,
+      userId: user.uid
+    });
+    setTasks([...tasks, { id: docRef.id, text: input, done: false, category: selectedCategory, userId: user.uid }]);
     setInput('');
     setSelectedCategory('');
   };
 
-  const toggleDone = (index) => {
+  const toggleDone = async (index) => {
+    const task = tasks[index];
+    const updated = { ...task, done: !task.done };
+    await updateDoc(doc(db, 'tasks', task.id), { done: updated.done });
     const newTasks = [...tasks];
-    newTasks[index].done = !newTasks[index].done;
+    newTasks[index] = updated;
     setTasks(newTasks);
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = async (index) => {
+    const task = tasks[index];
+    await deleteDoc(doc(db, 'tasks', task.id));
     setTasks(tasks.filter((_, i) => i !== index));
   };
 
@@ -66,7 +92,7 @@ function TodoPage() {
       </div>
       <ul className="todo-list">
         {filteredTasks.map((task, index) => (
-          <li key={index} className={task.done ? 'done' : ''}>
+          <li key={task.id} className={task.done ? 'done' : ''}>
             <input type="checkbox" onChange={() => toggleDone(index)} checked={task.done} />
             <span>{task.text}</span>
             {task.category && <span className="todo-category">[{task.category}]</span>}
