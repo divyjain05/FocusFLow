@@ -58,3 +58,90 @@ body {
 .auth-container a:hover {
   text-decoration: underline;
 }
+.category-manager {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  max-width: 350px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.category-manager h3 {
+  margin-bottom: 1rem;
+}
+.category-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.category-form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.category-form button {
+  padding: 0.5rem 1rem;
+  background: #2d72d9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.category-form button:hover {
+  background: #1a4e8a;
+}
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.category-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+}
+.delete-category {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.delete-category:hover {
+  background: #a31515;
+}
+/* Category dropdowns */
+.todo-input select,
+.todo-filter select,
+.notes-filter select,
+.dialog select,
+.journal-filter select,
+.journal-dialog select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+  margin-left: 0.5rem;
+}
+
+/* Category labels */
+.todo-category,
+.note-category,
+.journal-category {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  background: #e3eafc;
+  color: #2d72d9;
+  border-radius: 4px;
+  font-size: 0.95em;
+  font-weight: 500;
+}

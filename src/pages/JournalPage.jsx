@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import './JournalPage.css';
+import { useCategories } from '../components/CategoryManager';
 
 function JournalPage() {
+    const categories = useCategories();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [journals, setJournals] = useState([]);
     const [newJournal, setNewJournal] = useState({
         title: '',
         content: '',
         files: [],
-        date: new Date()
+        date: new Date(),
+        category: ''
     });
+    const [filterCategory, setFilterCategory] = useState('');
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
@@ -30,7 +34,8 @@ function JournalPage() {
                 title: '',
                 content: '',
                 files: [],
-                date: new Date()
+                date: new Date(),
+                category: ''
             });
             setIsDialogOpen(false);
         }
@@ -43,8 +48,24 @@ function JournalPage() {
         }));
     };
 
+    const filteredJournals = filterCategory
+        ? journals.filter(journal => journal.category === filterCategory)
+        : journals;
+
     return (
         <div className="journal-page">
+            <div className="journal-filter">
+                <label>Filter by Category: </label>
+                <select
+                    value={filterCategory}
+                    onChange={e => setFilterCategory(e.target.value)}
+                >
+                    <option value="">All</option>
+                    {categories.map(cat => (
+                        <option key={cat.id} value={cat.name}>{cat.name}</option>
+                    ))}
+                </select>
+            </div>
             <button 
                 className="add-journal-button"
                 onClick={() => setIsDialogOpen(true)}
@@ -53,13 +74,14 @@ function JournalPage() {
             </button>
 
             <div className="journals-container">
-                {journals.map((journal) => (
+                {filteredJournals.map((journal) => (
                     <div key={journal.id} className="journal-entry">
                         <div className="journal-header">
                             <h2>{journal.title}</h2>
                             <span className="journal-date">
                                 {journal.date.toLocaleDateString()}
                             </span>
+                            {journal.category && <span className="journal-category">[{journal.category}]</span>}
                         </div>
                         <p className="journal-content">{journal.content}</p>
                         {journal.files.length > 0 && (
@@ -91,6 +113,15 @@ function JournalPage() {
                             onChange={(e) => setNewJournal({ ...newJournal, content: e.target.value })}
                             className="dialog-content"
                         />
+                        <select
+                            value={newJournal.category}
+                            onChange={e => setNewJournal({ ...newJournal, category: e.target.value })}
+                        >
+                            <option value="">No Category</option>
+                            {categories.map(cat => (
+                                <option key={cat.id} value={cat.name}>{cat.name}</option>
+                            ))}
+                        </select>
                         <div className="file-upload-section">
                             <input
                                 type="file"
