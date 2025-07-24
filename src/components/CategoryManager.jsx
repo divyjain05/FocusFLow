@@ -57,7 +57,7 @@ export default function CategoryManager() {
       <h3>Categories</h3>
       <form onSubmit={handleAdd} className="category-form">
         <input value={name} onChange={e => setName(e.target.value)} placeholder="Add category" />
-        <button type="submit">Add</button>
+        <button type="submit" className="add-category-btn">+ Add Category</button>
       </form>
       {loading ? <div>Loading...</div> : (
         <ul className="category-list">

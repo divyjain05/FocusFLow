@@ -1,9 +1,9 @@
 .journal-page {
-    margin-left: 200px; /* account for sidebar */
+    margin-left: 200px;
     padding: 2rem;
     min-height: 100vh;
-    background-color: #333;
-    color: white;
+    background-color: #f4f7fa;
+    color: #222;
     position: relative;
 }
 
@@ -13,14 +13,18 @@
     gap: 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
+    border-left: 6px solid #2196f3;
+    padding-left: 2rem;
 }
 
 .journal-entry {
-    background-color: #444;
-    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 10px;
     padding: 1.5rem;
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(33,150,243,0.08);
+    font-family: 'Merriweather', serif, system-ui, Avenir, Helvetica, Arial;
+    border-left: 6px solid #90caf9;
 }
 
 .journal-header {
@@ -33,10 +37,11 @@
 .journal-header h2 {
     margin: 0;
     font-size: 1.5rem;
+    font-family: inherit;
 }
 
 .journal-date {
-    color: #888;
+    color: #1976d2;
     font-size: 0.9rem;
 }
 
@@ -44,6 +49,7 @@
     white-space: pre-wrap;
     line-height: 1.6;
     margin-bottom: 1rem;
+    font-family: inherit;
 }
 
 .add-journal-button {
@@ -53,18 +59,18 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #4CAF50;
+    background-color: #2196f3;
     color: white;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(33,150,243,0.18);
+    transition: background-color 0.3s;
     z-index: 100;
 }
 
 .add-journal-button:hover {
-    background-color: #45a049;
+    background-color: #1976d2;
 }
 
 .dialog-overlay {
@@ -73,7 +79,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(33, 150, 243, 0.08);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,25 +87,26 @@
 }
 
 .journal-dialog {
-    background-color: #444;
-    border-radius: 8px;
+    background-color: #fff;
+    border-radius: 10px;
     padding: 1.5rem;
     width: 90%;
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(33,150,243,0.12);
 }
 
 .dialog-title {
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
-    background-color: #555;
+    background-color: #e3f2fd;
     border: none;
     border-radius: 4px;
-    color: white;
+    color: #222;
     font-size: 1.2rem;
+    font-family: inherit;
 }
 
 .dialog-content {
@@ -107,10 +114,10 @@
     height: 200px;
     padding: 0.75rem;
     margin-bottom: 1rem;
-    background-color: #555;
+    background-color: #e3f2fd;
     border: none;
     border-radius: 4px;
-    color: white;
+    color: #222;
     resize: vertical;
     font-family: inherit;
     line-height: 1.6;
@@ -119,7 +126,7 @@
 .file-upload-section {
     margin: 1rem 0;
     padding: 1rem;
-    background-color: #555;
+    background-color: #e3f2fd;
     border-radius: 4px;
 }
 
@@ -130,15 +137,15 @@
 .file-input-label {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #666;
-    color: white;
+    background-color: #90caf9;
+    color: #222;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .file-input-label:hover {
-    background-color: #777;
+    background-color: #64b5f6;
 }
 
 .selected-files {
@@ -153,14 +160,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
-    background-color: #666;
+    background-color: #e3f2fd;
     border-radius: 4px;
 }
 
 .selected-file-item button {
     background: none;
     border: none;
-    color: white;
+    color: #1976d2;
     cursor: pointer;
     font-size: 1.2rem;
     padding: 0 0.5rem;
@@ -176,11 +183,11 @@
     gap: 0.5rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #555;
+    border-top: 1px solid #90caf9;
 }
 
 .attachment-item {
-    background-color: #555;
+    background-color: #e3f2fd;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -198,16 +205,16 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .dialog-actions button:first-child {
-    background-color: #666;
-    color: white;
+    background-color: #90caf9;
+    color: #222;
 }
 
 .dialog-actions button:last-child {
-    background-color: #4CAF50;
+    background-color: #2196f3;
     color: white;
 }
 
@@ -215,9 +222,8 @@
     opacity: 0.9;
 }
 
-/* Focus styles */
 .dialog-title:focus,
 .dialog-content:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #4CAF50;
+    box-shadow: 0 0 0 2px #2196f3;
 }

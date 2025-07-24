@@ -29,6 +29,8 @@ function App() {
     return () => clearTimeout(timeout);
   }, []);
 
+
+
   return (
     <>
       {showSplash ? (
@@ -61,6 +63,7 @@ function App() {
         </AuthProvider>
       )}
     </>
+
   );
 }
 

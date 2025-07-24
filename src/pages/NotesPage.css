@@ -1,9 +1,9 @@
 .notes-page {
-    margin-left: 200px; /* leaving enough space for sidebar */
+    margin-left: 200px;
     padding: 2rem;
     min-height: 100vh;
-    background-color: #333;
-    color: white;
+    background-color: #f7f6e7;
+    color: #222;
     position: relative;
 }
 
@@ -15,22 +15,27 @@
 }
 
 .note-card {
-    background-color: #444;
-    border-radius: 8px;
+    background-color: #fff9c4;
+    border-radius: 10px;
     padding: 1rem;
     min-height: 100px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    border-left: 6px solid #ffe082;
+    font-family: 'Shadows Into Light', cursive, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .note-card:hover {
-    transform: translateY(-2px);
-    background-color: #555;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+    background-color: #fffde7;
 }
 
 .note-card h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.1rem;
+    font-family: inherit;
 }
 
 .add-note-button {
@@ -40,17 +45,17 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ffd600;
+    color: #333;
     border: none;
     font-size: 24px;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .add-note-button:hover {
-    background-color: #45a049;
+    background-color: #ffe082;
 }
 
 .dialog-overlay {
@@ -67,23 +72,24 @@
 }
 
 .dialog {
-    background-color: #444;
-    border-radius: 8px;
+    background-color: #fffde7;
+    border-radius: 10px;
     padding: 1.5rem;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .dialog-title {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    background-color: #555;
+    background-color: #fff9c4;
     border: none;
     border-radius: 4px;
-    color: white;
+    color: #333;
     font-size: 1.1rem;
+    font-family: inherit;
 }
 
 .dialog-content {
@@ -91,10 +97,10 @@
     height: 150px;
     padding: 0.5rem;
     margin-bottom: 1rem;
-    background-color: #555;
+    background-color: #fff9c4;
     border: none;
     border-radius: 4px;
-    color: white;
+    color: #333;
     resize: vertical;
     font-family: inherit;
 }
@@ -110,26 +116,25 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .dialog-actions button:first-child {
-    background-color: #666;
-    color: white;
+    background-color: #ffe082;
+    color: #333;
 }
 
 .dialog-actions button:last-child {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ffd600;
+    color: #333;
 }
 
 .dialog-actions button:hover {
     opacity: 0.9;
 }
 
-/* Focus styles */
 .dialog-title:focus,
 .dialog-content:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #4CAF50;
+    box-shadow: 0 0 0 2px #ffd600;
 }
