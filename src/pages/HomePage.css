@@ -1,64 +1,179 @@
 .home-page {
-    margin-left: 200px; /* space for sidebar */
+    margin-top: 50px;
+    margin-left: 260px;
+    margin-right: 40px;
     padding: 2rem;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     color: white;
+}
+
+.home-page h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.dashboard-card {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    background-color: #333;
+    min-height: 300px;
 }
 
-.top-row {
+.journal-card {
+    grid-column: span 2;
+    min-height: 350px;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
     display: flex;
-    gap: 1.5rem;
-    height: 200px; /* Fixed height for top boxes */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
-.box {
-    flex: 1;
-    padding: 1.5rem;
-    background-color: #444;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s;
-    overflow-y: auto; /* For scrolling agar content overflows */
+.card-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
-.box:hover {
-    background-color: #555;
+.task-count {
+    background-color: #646cff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
 }
 
-.box h3 {
-    margin: 0 0 0.5rem 0;
-    color: #fff;
+.journal-date {
+    color: #aaa;
+    font-size: 0.9rem;
 }
 
-.bottom-box {
-    height: 300px; /* Taller height for the bottom box */
-    width: 100%;
-    padding: 1.5rem;
-    background-color: #444;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s;
-    overflow-y: auto;
-}
-
-.bottom-box:hover {
-    background-color: #555;
+.card-content {
+    flex-grow: 1;
 }
 
 .preview-list {
     list-style: none;
     padding: 0;
-    margin: 0.5rem 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .preview-item {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #444;
+    border-radius: 8px;
+    transition: background-color 0.2s;
 }
 
-.preview-item:last-child {
-    border-bottom: none;
+.preview-item:hover {
+    background-color: #555;
+}
+
+.todo-text, .note-title {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+
+.category-tag {
+    font-size: 0.85rem;
+    color: #aaa;
+    padding: 0.2rem 0.5rem;
+    background-color: #555;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.journal-preview h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    color: #646cff;
+}
+
+.journal-preview p {
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.empty-message {
+    color: #888;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.card-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-all-btn {
+    background: none;
+    border: none;
+    color: #646cff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.view-all-btn:hover {
+    opacity: 0.8;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #646cff;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .journal-card {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-page {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1rem;
+    }
+
+    .dashboard-grid {
+        gap: 1rem;
+    }
+
+    .dashboard-card {
+        min-height: 250px;
+    }
 }
