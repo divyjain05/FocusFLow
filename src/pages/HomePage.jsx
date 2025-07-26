@@ -29,40 +29,54 @@ function HomePage() {
 
     const fetchData = async () => {
       try {
-        // Fetch recent incomplete todos
+        // Fetch incomplete todos
         const todosQuery = query(
           collection(db, 'tasks'),
           where('userId', '==', user.uid),
-          where('done', '==', false),
-          orderBy('timestamp', 'desc'),
-          limit(3)
+          where('done', '==', false)
         );
         const todoSnap = await getDocs(todosQuery);
-        setTodos(todoSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        const todoData = todoSnap.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0))
+          .slice(0, 3);
+        setTodos(todoData);
 
-        // Fetch recent notes
+        // Fetch notes
         const notesQuery = query(
           collection(db, 'notes'),
-          where('userId', '==', user.uid),
-          orderBy('timestamp', 'desc'),
-          limit(3)
+          where('userId', '==', user.uid)
         );
         const notesSnap = await getDocs(notesQuery);
-        setNotes(notesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        const notesData = notesSnap.docs
+          .map(doc => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0))
+          .slice(0, 3);
+        setNotes(notesData);
 
         // Fetch most recent journal entry
         const journalQuery = query(
           collection(db, 'journals'),
-          where('userId', '==', user.uid),
-          orderBy('date', 'desc'),
-          limit(1)
+          where('userId', '==', user.uid)
         );
         const journalSnap = await getDocs(journalQuery);
         if (!journalSnap.empty) {
-          setJournal({ id: journalSnap.docs[0].id, ...journalSnap.docs[0].data() });
+          const journalData = journalSnap.docs
+            .map(doc => ({ id: doc.id, ...doc.data() }))
+            .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))[0];
+          
+          // Convert date string back to Date object if needed
+          if (journalData.date && typeof journalData.date === 'string') {
+            journalData.date = new Date(journalData.date);
+          }
+          setJournal(journalData);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        // Set empty data on error to show "no data" messages
+        setTodos([]);
+        setNotes([]);
+        setJournal(null);
       } finally {
         setLoading(false);
       }
