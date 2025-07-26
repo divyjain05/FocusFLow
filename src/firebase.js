@@ -22,4 +22,4 @@ if (firebaseConfig.measurementId) {
   analytics = getAnalytics(app);
 }
 
-export { auth, db, analytics }; 
+export { auth, db, analytics };
