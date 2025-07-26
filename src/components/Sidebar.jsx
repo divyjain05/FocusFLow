@@ -9,18 +9,11 @@ function Sidebar() {
   const [showCategories, setShowCategories] = useState(false);
   const [open, setOpen] = useState(window.innerWidth >= 768);
 
-  // Close sidebar on mobile when route changes
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setOpen(false);
-    }
-  }, [location.pathname]);
-
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        document.body.style.paddingLeft = open ? '260px' : '0';
+        document.body.style.paddingLeft = open ? '235px' : '0';
       } else {
         document.body.style.paddingLeft = '0';
       }
@@ -34,7 +27,7 @@ function Sidebar() {
   // Update padding when sidebar state changes
   useEffect(() => {
     if (window.innerWidth >= 768) {
-      document.body.style.paddingLeft = open ? '260px' : '0';
+      document.body.style.paddingLeft = open ? '235px' : '0';
     }
   }, [open]);
 
@@ -44,9 +37,6 @@ function Sidebar() {
 
   const handleNavigation = (path) => {
     navigate(path);
-    if (window.innerWidth < 768) {
-      setOpen(false);
-    }
   };
 
   return (
@@ -60,20 +50,26 @@ function Sidebar() {
         <span className="bar"></span>
         <span className="bar"></span>
       </button>
-      <div className={`sidebar${open ? ' sidebar-open' : ''}`}>
-        <div className="sidebar-item" onClick={() => handleNavigation('/')}>Home</div>
-        <div className="sidebar-item" onClick={() => handleNavigation('/todo')}>To-Do</div>
-        <div className="sidebar-item" onClick={() => handleNavigation('/notes')}>Notes</div>
-        <div className="sidebar-item" onClick={() => handleNavigation('/journal')}>Journal</div>
-        <div className="sidebar-item" onClick={() => setShowCategories(v => !v)}>
-          {showCategories ? 'Hide Categories' : 'Show Categories'}
+
+      <aside className={`sidebar${open ? ' sidebar-open' : ''}`}>
+        <div className="sidebar-content">
+          <div className="sidebar-item" onClick={() => handleNavigation('/')}>Home</div>
+          <div className="sidebar-item" onClick={() => handleNavigation('/todo')}>To-Do</div>
+          <div className="sidebar-item" onClick={() => handleNavigation('/notes')}>Notes</div>
+          <div className="sidebar-item" onClick={() => handleNavigation('/journal')}>Journal</div>
+          <div className="sidebar-item" onClick={() => setShowCategories(v => !v)}>
+            {showCategories ? 'Hide Categories' : 'Show Categories'}
+          </div>
+          {showCategories && <CategoryManager />}
         </div>
-        {showCategories && <CategoryManager />}
-      </div>
-      <div 
-        className={`sidebar-overlay${open ? ' active' : ''}`} 
-        onClick={() => setOpen(false)}
-      />
+      </aside>
+
+      {open && window.innerWidth < 768 && (
+        <div 
+          className={`sidebar-overlay${open ? ' active' : ''}`} 
+          onClick={handleToggle}
+        />
+      )}
     </>
   );
 }
