@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './NotesPage.css';
 import { useCategories } from '../components/CategoryManager';
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
 import { useAuth } from '../components/AuthProvider';
 import { collection, addDoc, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { uploadMultipleToCloudinary } from '../utils/cloudinary';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 function NotesPage() { 
     const categories = useCategories();
@@ -37,18 +37,17 @@ function NotesPage() {
         }
     };
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = async (e) = {
         const files = Array.from(e.target.files);
         setUploading(true);
         try {
-            const uploadedFiles = await uploadMultipleToCloudinary(files, `notes/${user.uid}`);
-            setNewNote(prev => ({
-                ...prev,
-                files: [
-                    ...(prev.files || []),
-                    ...uploadedFiles.map(f => ({ name: f.original_filename || f.url.split('/').pop(), url: f.url }))
-                ]
+            const uploadedFiles = await Promise.all(files.map(async (file) = {
+                const storageRef = ref(storage, `notes/${user.uid}/${Date.now()}_${file.name}`);
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+                return { name: file.name, url };
             }));
+            setNewNote(prev = ({ ...prev, files: [...(prev.files || []), ...uploadedFiles] }));
         } catch (error) {
             console.error('Error uploading files:', error);
         } finally {
@@ -173,20 +172,12 @@ function NotesPage() {
                                 {note.files && note.files.length > 0 && (
                                     <div className="note-files">
                                         {note.files.map((file, idx) => (
-                                            <div className="note-file-item" key={idx}>
-                                                {file.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
-                                                    <img src={file.url} alt={file.name} style={{ maxWidth: '100px', maxHeight: '100px' }} />
-                                                ) : file.url.match(/\.(pdf)$/i) ? (
-                                                    <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name || 'PDF File'}</a>
-                                                ) : (
-                                                    <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name || 'File'}</a>
-                                                )}
-                                            </div>
+                                            <a key={idx} href={file.url} target="_blank" rel="noopener noreferrer">{file.name}</a>
                                         ))}
                                     </div>
                                 )}
                                 <div className="note-actions">
-                                    <button onClick={() => handleEdit(note)}>View/Edit</button>
+                                    <button onClick={() => handleEdit(note)}>Edit</button>
                                     <button onClick={() => handleDelete(note.id)}>Delete</button>
                                 </div>
                             </div>
@@ -269,4 +260,4 @@ function NotesPage() {
     );
 }
 
-export default NotesPage;
+export default NotesPage; 

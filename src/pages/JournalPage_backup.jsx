@@ -5,7 +5,6 @@ import { db, storage } from '../firebase';
 import { useAuth } from '../components/AuthProvider';
 import { collection, addDoc, query, where, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { uploadMultipleToCloudinary } from '../utils/cloudinary';
 
 function JournalPage() {
     const categories = useCategories();
@@ -48,19 +47,17 @@ function JournalPage() {
         }
     };
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = async (e) = {
         const files = Array.from(e.target.files);
         setUploading(true);
         try {
-            const uploadedFiles = await uploadMultipleToCloudinary(files, `journals/${user.uid}`);
-            // uploadedFiles: [{ url, public_id, ... }]
-            setNewJournal(prev => ({
-                ...prev,
-                files: [
-                    ...(prev.files || []),
-                    ...uploadedFiles.map(f => ({ name: f.original_filename || f.url.split('/').pop(), url: f.url }))
-                ]
+            const uploadedFiles = await Promise.all(files.map(async (file) = {
+                const storageRef = ref(storage, `journals/${user.uid}/${Date.now()}_${file.name}`);
+                await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(storageRef);
+                return { name: file.name, url };
             }));
+            setNewJournal(prev = ({ ...prev, files: [...(prev.files || []), ...uploadedFiles] }));
         } catch (error) {
             console.error('Error uploading files:', error);
         } finally {
@@ -198,21 +195,20 @@ function JournalPage() {
                                 <p className="journal-content">{journal.content}</p>
                                 {journal.files && journal.files.length > 0 && (
                                     <div className="journal-attachments">
-                                        {journal.files.map((file, idx) => (
-                                            <div className="attachment-item" key={idx}>
-                                                {file.url.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
-                                                    <img src={file.url} alt={file.name} style={{ maxWidth: '100px', maxHeight: '100px' }} />
-                                                ) : file.url.match(/\.(pdf)$/i) ? (
-                                                    <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name || 'PDF File'}</a>
-                                                ) : (
-                                                    <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name || 'File'}</a>
-                                                )}
-                                            </div>
+                                        {journal.files.map((file, index) => (
+                                            <a key={index} 
+                                               href={file.url} 
+                                               target="_blank" 
+                                               rel="noopener noreferrer"
+                                               className="attachment-item"
+                                            >
+                                                {file.name}
+                                            </a>
                                         ))}
                                     </div>
                                 )}
                                 <div className="journal-actions">
-                                    <button onClick={() => handleEdit(journal)}>View/Edit</button>
+                                    <button onClick={() => handleEdit(journal)}>Edit</button>
                                     <button onClick={() => handleDelete(journal.id)}>Delete</button>
                                 </div>
                             </div>
