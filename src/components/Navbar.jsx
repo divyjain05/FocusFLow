@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import { useAuth } from './AuthProvider';
-import logoFocusFlow from '../images/logoFocusFLow.png';
+import logoFocusFlow from '../Images/logoFocusFlow.png';
 
 function Navbar() {
     const { user, logout } = useAuth();
